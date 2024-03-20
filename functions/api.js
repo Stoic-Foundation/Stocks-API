@@ -3,7 +3,7 @@ const yahooFinance = require("yahoo-finance2").default;
 const serverless = require("serverless-http");
 const router = express.Router()
 const app = express();
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
      
     res.status(200).send({
         status:200,
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   });
 
 
-app.get("/search", async (req, res) => {
+  router.get("/search", async (req, res) => {
   try {
     var query = req.query.q;
     
@@ -26,7 +26,7 @@ app.get("/search", async (req, res) => {
   }
 });
 
-app.get("/details",async(req,res)=>{
+router.get("/details",async(req,res)=>{
     try{
         var name = req.query.name;
         const quote  = await yahooFinance.quote(name);
@@ -42,7 +42,12 @@ app.get("/details",async(req,res)=>{
 //   res.send(req.params.id); //req.params.id to get :id value
 //   // res.send(req.query) //req.query to get ?sortBy=name values
 // });
-app.use('/functions/index',router);
+
+// use / instead of /.netlify/functions/app
+app.use('/.netlify/functions/api', router);  // path must route to lambda
+
+
+
 module.exports.handler = serverless(app);
 // const PORT = process.env.PORT || 8080;
 // app.listen(PORT, () =>
