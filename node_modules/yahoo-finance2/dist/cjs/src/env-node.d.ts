@@ -1,0 +1,8 @@
+/// <reference types="node" />
+import { URLSearchParams } from "url";
+import fetch from "node-fetch";
+declare const _default: {
+    fetch: typeof fetch;
+    URLSearchParams: typeof URLSearchParams;
+};
+export default _default;
