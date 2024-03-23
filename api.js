@@ -1,6 +1,5 @@
 const express = require("express");
 const yahooFinance = require("yahoo-finance2").default;
-const serverless = require("serverless-http");
 const router = express.Router()
 const app = express();
 router.get('/', (req, res) => {
@@ -43,13 +42,8 @@ router.get("/details",async(req,res)=>{
 //   // res.send(req.query) //req.query to get ?sortBy=name values
 // });
 
-// use / instead of /.netlify/functions/app
-app.use('/.netlify/functions/api', router);  // path must route to lambda
 
-
-
-module.exports.handler = serverless(app);
-// const PORT = process.env.PORT || 8080;
-// app.listen(PORT, () =>
-//   console.log(`Server is running on http://localhost:${PORT}`)
-// );
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () =>
+  console.log(`Server is running on http://localhost:${PORT}`)
+);
