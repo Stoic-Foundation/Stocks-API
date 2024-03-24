@@ -8,6 +8,7 @@ app.get("/", (req, res) => {
   });
 });
 
+// required parameters: q
 app.get("/search", async (req, res) => {
   try {
     var query = req.query.q;
@@ -21,6 +22,7 @@ app.get("/search", async (req, res) => {
   }
 });
 
+// required parameters: name
 app.get("/details", async (req, res) => {
   try {
     var name = req.query.name;
@@ -31,10 +33,38 @@ app.get("/details", async (req, res) => {
   }
 });
 
-// app.get("/api/course/:id", (req, res) => {
-//   res.send(req.params.id); //req.params.id to get :id value
-//   // res.send(req.query) //req.query to get ?sortBy=name values
-// });
+// required parameters: name, period1
+app.get("/chart", async (req, res) => {
+  try {
+    var name = req.query.name;
+    var period1 = req.query.period1;
+    var period2 = req.query.period2;
+    var queryOptions = {};
+
+    if (name.trim().length !== 0 && period1.trim().length !== 0) {
+      queryOptions = { period1: period1, period2: period2 };
+      const chart = await yahooFinance.chart(name, queryOptions);
+      res.status(200).send(chart);
+    } else {
+      res.status(404).send({Status:404,Error:"Please provide the required parameters"});
+    }
+    
+  } catch (error) {
+    res.status(404).send(error);
+  }
+
+});
+
+// required parameters: name
+app.get("/recommendations", async (req, res) => {
+  try {
+    var name = req.query.name;
+    const recommendations = await yahooFinance.recommendationsBySymbol(name);
+    res.status(200).send(recommendations);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
