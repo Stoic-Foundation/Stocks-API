@@ -1,3 +1,6 @@
+
+// !deprecated  
+
 const express = require("express");
 const yahooFinance = require("yahoo-finance2").default;
 const app = express();
