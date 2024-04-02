@@ -4,6 +4,7 @@ import {
   getDetails,
   getRecommendations,
   searchByQuery,
+  getTrending,
 } from "./functions.js";
 
 const apiRoutes = Router();
@@ -19,5 +20,8 @@ apiRoutes.get("/chart", getChart);
 
 // required parameters: name
 apiRoutes.get("/recommendations", getRecommendations);
+
+// required parameters: region, count
+apiRoutes.get("/trending", getTrending);
 
 export default apiRoutes;
