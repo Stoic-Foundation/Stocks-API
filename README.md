@@ -1,4 +1,3 @@
-
 # Stocks API
 
 Welcome to the Stocks API! This API allows you to access stock information. 
@@ -23,11 +22,45 @@ Once the server is running, you can make HTTP requests to the provided endpoints
 
 The API provides the following endpoints:
 
-- `GET /search`: Search for a perticular stocks.
+- `GET /search`: Search for a particular stock.
 - `GET /details`: Retrieve information about a specific stock.
+- `GET /chart`: Retrieve stock chart data.
+- `GET /recommendations`: Retrieve stock recommendations.
+- `GET /trending`: Retrieve trending stocks.
+
+### Endpoint Details
+
+#### `/search`
+- **Method:** GET
+- **Description:** Search for stocks by query.
+- **Parameters:**
+  - `q` (required): Query string for search.
+
+#### `/details`
+- **Method:** GET
+- **Description:** Get details about a specific stock.
+- **Parameters:**
+  - `name` (required): Stock name.
+
+#### `/chart`
+- **Method:** GET
+- **Description:** Get chart data for a specific stock.
+- **Parameters:**
+  - `name` (required): Stock name.
+  - `period1` (required): Start timestamp for the chart data.
+
+#### `/recommendations`
+- **Method:** GET
+- **Description:** Get recommendations for a specific stock.
+- **Parameters:**
+  - `name` (required): Stock name.
+
+#### `/trending`
+- **Method:** GET
+- **Description:** Get trending stocks.
+- **Parameters:**
+  - `region` (required): Region for trending stocks.
+  - `count` (required): Number of trending stocks to retrieve.
 
 ## Contributing
 Contributions to this project are welcome! If you encounter any bugs, have feature requests, or would like to contribute code, please open an issue or submit a pull request on GitHub.
-
-
-
